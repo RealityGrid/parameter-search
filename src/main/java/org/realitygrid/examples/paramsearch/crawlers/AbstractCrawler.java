@@ -48,7 +48,7 @@ package org.realitygrid.examples.paramsearch.crawlers;
 import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
-import org.realitygrid.examples.paramsearch.crawlers.view.MainWindow;
+import org.realitygrid.examples.paramsearch.ui.MainWindow;
 
 public abstract class AbstractCrawler {
 

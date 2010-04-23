@@ -52,7 +52,7 @@ import javax.swing.JFrame;
 
 import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.crawlers.AbstractCrawler;
-import org.realitygrid.examples.paramsearch.crawlers.view.MainWindow;
+import org.realitygrid.examples.paramsearch.ui.MainWindow;
 
 public final class Runner {
 

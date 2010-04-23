@@ -43,7 +43,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.realitygrid.examples.paramsearch.crawlers.view;
+package org.realitygrid.examples.paramsearch.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
