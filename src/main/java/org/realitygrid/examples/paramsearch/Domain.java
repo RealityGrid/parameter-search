@@ -45,10 +45,10 @@
 
 package org.realitygrid.examples.paramsearch;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 public class Domain {
 	private final static int SLEEP_TIME = 1000;
@@ -67,9 +67,18 @@ public class Domain {
 		targets = new ArrayList<Target>(numTargets);
 
 		// generate target locations
-		byte[] hash = DigestUtils.sha(name + numTargets + size + TARGET_SEED);
-		generateTargets(hash);
-		Collections.sort(targets);
+		try {
+			MessageDigest md;
+			md = MessageDigest.getInstance("sha1");
+			md.reset();
+			md.update((name + numTargets + size + TARGET_SEED).getBytes());
+			byte[] hash = md.digest();
+
+			generateTargets(hash);
+			Collections.sort(targets);
+		} catch (NoSuchAlgorithmException e) {
+			// I know sha1 is correct so...
+		}
 	}
 
 	public String getName() {
