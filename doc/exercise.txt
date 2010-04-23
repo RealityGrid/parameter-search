@@ -1,0 +1,107 @@
+Parameter Search Steering Exercise
+----------------------------------
+
+Introduction
+------------
+
+The purpose of this exercise is to show how computational steering and online
+visualization can help someone with expert knowledge of a particular domain
+obtain results in less time than a naïve computational search algorithm can on
+its own.
+
+The search domain of this exercise is extremely simple: A 300 x 300 x 300 cube
+with five targets hidden in it. These targets must be found.
+
+The expert knowledge that you are armed with is as follows:
+ * The targets must be found in order.
+ * The targets are ordered from lowest to highest firstly by their x
+   coordinate, then their y coordinate and finally their z coordinate.
+ * The current target to be sought is always surrounded by a blue halo.
+ * Testing anywhere within this blue halo is enough to trigger the target and
+   find it.
+ * Testing a point in the cube takes approximately one second.
+
+The computational search algorithms do not know this information but it does
+also hold true for them.
+
+The search algorithms
+---------------------
+
+The computational search algorithms are:
+
+RandomCrawler
+Randomly chooses points to test.
+
+SimpleCrawler
+Starts at the origin, (0, 0, 0), and searches through each point in turn in
+increasing z then y then x. Once it finds a point, it starts again.
+
+ImprovedSimpleCrawler
+As SimpleCrawler above, but restarts at the point it has just found rather
+than the origin.
+
+DirectedCrawler
+Starts at the origin but each test directs towards the target in one unit
+steps. It travels along the axes one by one (x, then y, then z) homing in on
+the target. It restarts from the last target when finding the next one.
+
+ImprovedDirectedCrawler
+As DirectedCrawler above, but it can move along all three axes at once in
+single unit steps. It also restarts from the last found target when searching
+for the next one.
+
+Steered Search
+You will be using the SteeredCrawler to find the targets. Simply choose a
+point to test using the editable boxes and hit the button marked “Test!”. You
+can perform as many tests as you like.
+
+Running the software
+--------------------
+
+Simply run the jar file as you would any other giving it the crawler strategy
+you would like it to use as an argument. So to run the DirectedCrawler
+strategy you would use
+
+$ java -jar Parameter-Search.jar DirectedCrawler
+
+It is worth watching the various automatic crawlers before trying the
+SteeredCrawler, if only to see how badly they perform!
+
+Performance of the crawlers
+---------------------------
+
+RandomCrawler
+The odds of it hitting a single target are of the order of 20,000,000 to one.
+You’d be better off buying a lottery ticket than waiting around for it to
+happen.
+
+SimpleCrawler
+With up to 27,000,000 points to test, restarting at the origin each time it
+finds one and the next one taking longer to find than the last (because you
+know that the targets are ordered, but it does not) it could take in the
+region of four years to find all the points.
+
+ImprovedSimpleCrawler
+Improved but not by much. If the last point is anywhere near the far reaches
+of the cube (300, 300, 300) it will take around 300 days to get there.
+
+DirectedCrawler
+Depending on the distribution of the points the search could be expected to
+take anywhere between 15 to 20 minutes.
+
+ImprovedDirectedCrawler
+Performance is similar to the DirectedCrawler, but the improved homing ability
+brings search time down to approximately 10 minutes.
+
+SteeredCrawler
+If you are good at estimating ranges then under a minute could be possible,
+but anything under four minutes is good.
+
+Summary
+-------
+
+It should be obvious that even a small amount of domain knowledge can improve
+search times by an order of magnitude. If what you are searching for is more
+complicated than a single point, for example an irregular pattern, then
+computational steering to direct and online visualization to monitor can
+improve search times even further.
