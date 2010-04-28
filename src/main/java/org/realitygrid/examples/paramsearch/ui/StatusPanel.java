@@ -69,7 +69,7 @@ public class StatusPanel extends JScrollPane {
 
 	private JTextArea console;
 	private StatusStream stream;
-	
+
 	/**
 	 * Create a scrollable status panel and create its PrintStream
 	 * representation.
@@ -105,7 +105,7 @@ public class StatusPanel extends JScrollPane {
 	class StatusStream extends OutputStream {
 
 		private JTextArea ta;
-		
+
 		public StatusStream(JTextArea ta) {
 			super();
 			this.ta = ta;

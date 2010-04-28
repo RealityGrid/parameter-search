@@ -76,7 +76,7 @@ public abstract class InteractiveCrawler extends AbstractCrawler {
 	 */
 	protected InteractiveCrawler(String s, Domain d) {
 		super(s, d, true);
-		
+
 		pointQueue = new ConcurrentLinkedQueue<Point3D>();
 	}
 
@@ -88,11 +88,11 @@ public abstract class InteractiveCrawler extends AbstractCrawler {
 	public void queue(Point3D p) {
 		pointQueue.add(p);
 	}
-	
+
 	@Override
 	public final Point3D search() {
 		Point3D p;
-		
+
 		do {
 			p = pointQueue.poll();
 

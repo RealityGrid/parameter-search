@@ -61,7 +61,7 @@ public final class RandomCrawler extends AbstractCrawler {
 
 	private Random random;
 	private final int size;
-	
+
 	/**
 	 * Create an RandomCrawler to search the provided domain.
 	 * @param d the domain to search.
@@ -77,7 +77,7 @@ public final class RandomCrawler extends AbstractCrawler {
 		int x, y, z;
 		Point3D test;
 		Vector3D next;
-		
+
 		do {
 			x = random.nextInt(size);
 			y = random.nextInt(size);
@@ -86,7 +86,7 @@ public final class RandomCrawler extends AbstractCrawler {
 			next = testPoint(test);
 		}
 		while(!next.equals(Vector3D.ZERO));
-		
+
 		return test;
 	}
 }

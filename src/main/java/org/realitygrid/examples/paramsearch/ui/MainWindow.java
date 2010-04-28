@@ -79,7 +79,7 @@ public class MainWindow extends JFrame {
 
 	private AbstractCrawler parent;
 	private Domain domain;
-	
+
 	// components
 	private ViewPanel topView;
 	private ViewPanel sideView;
@@ -96,21 +96,21 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow(AbstractCrawler ac, Domain d) throws HeadlessException {
 		super();
-		
+
 		parent = ac;
 		domain = d;
-				
+
 		Container contentPane = this.getContentPane();
 		contentPane.add(createPanels(), BorderLayout.CENTER);
 		contentPane.add(createProgressBar(), BorderLayout.SOUTH);
-		
+
 		this.setTitle("Searching domain with '" + parent.getName() + "'");
 		this.pack();
 		this.setResizable(false);
 		parent.setView(this);
 		showHint();
 	}
-	
+
 	/**
 	 * Get the crawler that this window is displaying.
 	 * @return the crawler.
@@ -121,7 +121,7 @@ public class MainWindow extends JFrame {
 
 	private JPanel createPanels() {
 		int domainSize = domain.getSize();
-		
+
 		this.topView = new ViewPanel(ViewPanel.Projection.XZ, PANEL_SIZE, domainSize);
 		this.sideView = new ViewPanel(ViewPanel.Projection.ZY, PANEL_SIZE, domainSize);
 		this.frontView = new ViewPanel(ViewPanel.Projection.XY, PANEL_SIZE, domainSize);
@@ -130,39 +130,39 @@ public class MainWindow extends JFrame {
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
 		JPanel topPanel = new JPanel();
-		
+
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.LINE_AXIS));
-		
+
 		leftPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
 		leftPanel.add(infoPanel);
 		leftPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
 		leftPanel.add(sideView);
 		leftPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
-		
+
 		rightPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
 		rightPanel.add(topView);
 		rightPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
 		rightPanel.add(frontView);
 		rightPanel.add(Box.createRigidArea(new Dimension(0, PAD)));
-		
+
 		topPanel.add(Box.createRigidArea(new Dimension(PAD, 0)));
 		topPanel.add(leftPanel);
 		topPanel.add(Box.createRigidArea(new Dimension(PAD, 0)));
 		topPanel.add(rightPanel);
 		topPanel.add(Box.createRigidArea(new Dimension(PAD, 0)));
-		
+
 		return topPanel;
 	}
-	
+
 	private JPanel createProgressBar() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		
+
 		JLabel label = new JLabel("Progress:");
 		pbar = new JProgressBar(0, domain.getNumTargets());
-		
+
 		panel.add(Box.createRigidArea(new Dimension(PAD, 0)));
 		panel.add(label);
 		panel.add(Box.createRigidArea(new Dimension(PAD, 0)));
@@ -173,10 +173,10 @@ public class MainWindow extends JFrame {
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 		p.add(panel);
 		p.add(Box.createRigidArea(new Dimension(0, PAD)));
-		
+
 		return p;
 	}
-	
+
 	/**
 	 * Register a point to be shown in the displays. This method sends the
 	 * point and found status through to the panels that are showing the
@@ -190,7 +190,7 @@ public class MainWindow extends JFrame {
 			pbar.setValue(pbar.getValue() + 1);
 			showHint();
 		}
-		
+
 		frontView.showPoint(new Point(p.getX(), p.getY()), found);
 		topView.showPoint(new Point(p.getX(), p.getZ()), found);
 		sideView.showPoint(new Point(p.getZ(), p.getY()), found);
@@ -202,7 +202,7 @@ public class MainWindow extends JFrame {
 	 */
 	public void showHint() {
 		Point3D p = domain.getHint();
-		
+
 		if(p != null) {
 			frontView.showHint(p.getX(), p.getY(), 20, 20);
 			topView.showHint(p.getX(), p.getZ(), 20, 20);

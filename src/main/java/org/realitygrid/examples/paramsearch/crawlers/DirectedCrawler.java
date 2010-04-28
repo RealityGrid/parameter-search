@@ -74,9 +74,9 @@ public class DirectedCrawler extends AbstractCrawler {
 	 */
 	protected DirectedCrawler(String s, Domain d) {
 		super(s, d);
-		start = new Point3D(0);	
+		start = new Point3D(0);
 	}
-	
+
 	/**
 	 * Create a DirectCrawler with the specified domain and a start point at
 	 * the origin.
@@ -89,15 +89,15 @@ public class DirectedCrawler extends AbstractCrawler {
 	@Override
 	public Point3D search() {
 		Vector3D next;
-		
+
 		do {
 			next = testPoint(start);
 			if(next.equals(Vector3D.ZERO)) {
 				return start;
 			}
-			
+
 			next = squash(next);
-			
+
 			if(next.getX() != 0.0)
 				start = new Point3D(start.getX() + next.getX().intValue(), start.getY(), start.getZ());
 			else if(next.getY() != 0.0)
@@ -107,10 +107,10 @@ public class DirectedCrawler extends AbstractCrawler {
 		}
 		while(true);
 	}
-	
+
 	/**
 	 * "Squash" a vector so that it just has unit components. So squashing the
-	 * vector {@code (3.2, 0.0, -0.2)} would give {@code (1.0, 0.0, -1.0)}. 
+	 * vector {@code (3.2, 0.0, -0.2)} would give {@code (1.0, 0.0, -1.0)}.
 	 * @param v the vector to be squashed.
 	 * @return the squashed vector.
 	 */
@@ -118,7 +118,7 @@ public class DirectedCrawler extends AbstractCrawler {
 		double x = (v.getX() == 0.0) ? 0.0 : v.getX()/Math.abs(v.getX());
 		double y = (v.getY() == 0.0) ? 0.0 : v.getY()/Math.abs(v.getY());
 		double z = (v.getZ() == 0.0) ? 0.0 : v.getZ()/Math.abs(v.getZ());
-		
+
 		return new Vector3D(x, y, z);
 	}
 }

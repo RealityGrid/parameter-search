@@ -69,7 +69,7 @@ public final class Runner {
 	private MainWindow window;
 	private Domain domain;
 	private String crawlerName;
-	
+
 	/**
 	 * This is the standard entry point for this example. It creates a Runner
 	 * which in turn instantiates a crawler and runs it. Its usage is described
@@ -77,7 +77,7 @@ public final class Runner {
 	 * <p/>{@code Usage: java Runner [OPTIONS] <Crawler>}
 	 * <p/>{@code Where OPTIONS can be one of:}<br/>
 	 * {@code   -b		benchmark the crawler with a standard target set.}<br/>
-     * {@code   -c		console only, no user interface (implies -b).}
+	 * {@code   -c		console only, no user interface (implies -b).}
 	 * @param args The command line arguments with which to configure the run.
 	 */
 	public static void main(String[] args) {
@@ -86,12 +86,12 @@ public final class Runner {
 		boolean noView = false;
 		String classname ="";
 		double duration = 0.0;
-		
+
 		if(args.length  < 1) {
 			usage();
 			System.exit(1);
 		}
-		
+
 		try {
 			if(args.length > 1) {
 				if(args[0].equals("-b")) {
@@ -104,17 +104,17 @@ public final class Runner {
 					usage();
 					System.exit(1);
 				}
-				
+
 				classname = args[1];
 			}
 			else
 				classname = args[0];
-			
+
 			runner = new Runner(classname, benchmark);
 			runner.loadClass();
 			if(!noView)
 				runner.createAndShowGUI();
-		
+
 			System.out.println((benchmark ? "Benchmarking" : "Searching") + " class " + classname);
 			System.out.println("Searching for " + NUM_TARGETS + " targets...");
 			if(benchmark) {
@@ -153,7 +153,7 @@ public final class Runner {
 	 */
 	public Runner(String classname, boolean benchmark) {
 		crawlerName = classname;
-		
+
 		if(benchmark)
 			domain = new Domain("Benchmark", DOMAIN_SIZE, NUM_TARGETS);
 		else {
@@ -161,7 +161,7 @@ public final class Runner {
 			domain = new Domain(crawlerName + username, DOMAIN_SIZE, NUM_TARGETS);
 		}
 	}
-	
+
 	/**
 	 * Creates a non-benchmarking runner.
 	 * 
@@ -171,7 +171,7 @@ public final class Runner {
 	public Runner(String classname) {
 		this(classname, false);
 	}
-	
+
 	/**
 	 * Get the name of the crawler being used by this runner.
 	 * 
@@ -189,14 +189,14 @@ public final class Runner {
 	 */
 	public double run() {
 		domain.reset();
-		
+
 		long startTime = System.currentTimeMillis();
 		crawler.run();
 		long endTime = System.currentTimeMillis();
-		
+
 		return (endTime - startTime) / 1000.0;
 	}
-	
+
 	private void loadClass() throws ClassNotFoundException, BadCrawlerException, Exception {
 		Class<?> cls = Class.forName("org.realitygrid.examples.paramsearch.crawlers." + crawlerName);
 		checkSuperclass(cls);
@@ -207,17 +207,17 @@ public final class Runner {
 
 	private void checkSuperclass(Class<?> cls) throws BadCrawlerException {
 		Class<?> superclass = cls.getSuperclass();
-		
-		while(!superclass.getSimpleName().equals("Object")) {		
+
+		while(!superclass.getSimpleName().equals("Object")) {
 			if(superclass.getSimpleName().equals("AbstractCrawler"))
 				return;
-			
+
 			superclass = superclass.getSuperclass();
 		}
-		
+
 		throw new BadCrawlerException();
 	}
-	
+
 	private void createAndShowGUI() throws InterruptedException, InvocationTargetException {
 		javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
 			public void run() {
@@ -227,7 +227,7 @@ public final class Runner {
 			}
 		});
 	}
-	
+
 	private static void usage() {
 		System.err.println("Usage: java Runner [OPTIONS] <Crawler>");
 		System.err.println("\nWhere OPTIONS can be one of:");

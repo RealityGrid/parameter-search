@@ -63,14 +63,14 @@ public final class ImprovedSimpleCrawler extends SimpleCrawler {
 	private int xLocation;
 	private int yLocation;
 	private int zLocation;
-	
+
 	/**
 	 * Create an ImprovedSimpleCrawler to search the provided domain.
 	 * @param d the domain to search.
 	 */
 	public ImprovedSimpleCrawler(Domain d) {
 		super("Improved Simple Crawler", d);
-		
+
 		xLocation = 0;
 		yLocation = 0;
 		zLocation = 0;
@@ -101,7 +101,7 @@ public final class ImprovedSimpleCrawler extends SimpleCrawler {
 				}
 			}
 		}
-		
+
 		xLocation = 0;
 		yLocation = 0;
 		zLocation = 0;

@@ -111,7 +111,7 @@ public class Tuple3<T extends Number> extends Tuple<T> {
 	public <U extends Number> double distance(Tuple3<U> t) {
 		return super.distance(t);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "(" + getX() + ", " + getY() + ", " + getZ() + ")";

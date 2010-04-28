@@ -81,7 +81,7 @@ public final class ControlPanel extends JPanel {
 	private MainWindow parent;
 	private AbstractCrawler crawler;
 	private int panelSize;
-	
+
 	// components
 	private JLabel titleLabel;
 	private JPanel control;
@@ -94,39 +94,39 @@ public final class ControlPanel extends JPanel {
 	 */
 	public ControlPanel(MainWindow scw, int ps) {
 		super(true);
-		
+
 		parent = scw;
 		panelSize = ps;
 		crawler = parent.getCrawler();
-		
+
 		if(crawler.isInteractive())
 			titleLabel = new JLabel("Control");
 		else
 			titleLabel = new JLabel("Status");
-		
+
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));		
+
+		this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(createPanel());
 		this.add(Box.createRigidArea(new Dimension(0, PAD)));
 		this.add(titleLabel);
 	}
-	
+
 	private JPanel createPanel() {
 		// create status panel and redirect System.out to it
 		status = new StatusPanel();
 		System.setOut(status.getPrintStream());
-		
+
 		if(crawler.isInteractive()) {
 			control = ((InteractiveCrawler) crawler).getPanel();
 		}
 		else {
 			control = new JPanel();
 			control.setLayout(new BoxLayout(control, BoxLayout.PAGE_AXIS));
-			control.add(Box.createRigidArea(new Dimension(0, PAD)));			
+			control.add(Box.createRigidArea(new Dimension(0, PAD)));
 		}
-		
+
 		control.add(status);
 		control.add(Box.createRigidArea(new Dimension(0, PAD)));
 
@@ -143,7 +143,7 @@ public final class ControlPanel extends JPanel {
 		container.add(Box.createRigidArea(new Dimension(PAD, 0)));
 		container.add(control);
 		container.add(Box.createRigidArea(new Dimension(PAD, 0)));
-		
+
 		return container;
 	}
 }

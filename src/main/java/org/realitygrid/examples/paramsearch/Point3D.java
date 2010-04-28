@@ -125,7 +125,7 @@ public final class Point3D extends Tuple3<Integer> implements Comparable<Point3D
 		else if(getZ() != o.getZ()) {
 			return getZ() - o.getZ();
 		}
-		
+
 		return 0;
 	}
 
@@ -140,7 +140,7 @@ public final class Point3D extends Tuple3<Integer> implements Comparable<Point3D
 				getY() + v.getY().intValue(),
 				getZ() + v.getZ().intValue());
 	}
-	
+
 	/**
 	 * Test to see if the specified point is within a certain distance of
 	 * another one. <strong>This method tests distance along each axis, not straight
@@ -152,13 +152,13 @@ public final class Point3D extends Tuple3<Integer> implements Comparable<Point3D
 	public boolean isWithin(int d, Point3D p) {
 		if(Math.abs(this.getX() - p.getX()) > d)
 			return false;
-		
+
 		if(Math.abs(this.getY() - p.getY()) > d)
 			return false;
-		
+
 		if(Math.abs(this.getZ() - p.getZ()) > d)
 			return false;
-					
+
 		return true;
 	}
 }

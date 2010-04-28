@@ -50,12 +50,12 @@ package org.realitygrid.examples.paramsearch;
  * @author Robert Haines
  */
 public final class Vector3D extends Tuple3<Double> {
-	
+
 	/**
 	 * The zero vector, {@code (0, 0, 0)}.
 	 */
 	public static final Vector3D ZERO = new Vector3D(0.0);
-	
+
 	private double magnitude;
 
 	/**
@@ -77,7 +77,7 @@ public final class Vector3D extends Tuple3<Double> {
 		super(t);
 		calcMagnitude();
 	}
-	
+
 	/**
 	 * Create a vector with all components equal.
 	 * @param c the single X, Y and Z component.
@@ -86,7 +86,7 @@ public final class Vector3D extends Tuple3<Double> {
 		super(c);
 		calcMagnitude();
 	}
-	
+
 	/**
 	 * Create a vector with {@link Integer} components.
 	 * @param x the X component.
@@ -109,7 +109,7 @@ public final class Vector3D extends Tuple3<Double> {
 	public double getMagnitude() {
 		return magnitude;
 	}
-	
+
 	/**
 	 * Get the normalized form of this vector. A normalized vector is one which
 	 * preserves the direction but has a magnitude of one. It is calculated by

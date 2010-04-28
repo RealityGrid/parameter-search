@@ -58,7 +58,7 @@ import org.realitygrid.examples.paramsearch.Vector3D;
  * @see Domain
  */
 public final class ImprovedDirectedCrawler extends DirectedCrawler {
-	
+
 	/**
 	 * Create a ImprovedDirectCrawler with the specified domain.
 	 * @param d the domain to be searched.
@@ -70,13 +70,13 @@ public final class ImprovedDirectedCrawler extends DirectedCrawler {
 	@Override
 	public Point3D search() {
 		Vector3D next;
-		
+
 		do {
 			next = testPoint(start);
 			if(next.equals(Vector3D.ZERO)) {
 				return start;
 			}
-			
+
 			start = start.moveBy(squash(next));
 		}
 		while(true);

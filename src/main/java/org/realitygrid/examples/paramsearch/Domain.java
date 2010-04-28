@@ -51,26 +51,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
-  * The Domain class represents a volume of 3D space that has a number of
-  * targets hidden in it. These targets must be found. The only way of
-  * finding a target is to ask the domain whether a point in space is within
-  * a certain distance of it or not. If so the target is marked as found and
-  * the next target, if there is one, is activated.
-  * <p/>The following information holds true for any crawler operating on a
-  * domain but certain crawlers know more of it than others:
-  * <ul>
-  *   <li>Only one target is active at any time and must be found in
-  *   order.</li>
-  *   <li>The targets are ordered from lowest to highest firstly by their x
-  *   coordinate, then their y coordinate and finally their z coordinate.</li>
-  *   <li>The current target to be sought is always surrounded by a blue
-  *   halo.</li>
-  *   <li>Testing anywhere within this blue halo is enough to trigger the
-  *   target and find it.</li>
-  *   <li>Testing a point in the domain takes approximately one second.</li>
-  * </ul>
-  * @author Robert Haines
-  * @see org.realitygrid.examples.paramsearch.crawlers 
+ * The Domain class represents a volume of 3D space that has a number of
+ * targets hidden in it. These targets must be found. The only way of
+ * finding a target is to ask the domain whether a point in space is within
+ * a certain distance of it or not. If so the target is marked as found and
+ * the next target, if there is one, is activated.
+ * <p/>The following information holds true for any crawler operating on a
+ * domain but certain crawlers know more of it than others:
+ * <ul>
+ *   <li>Only one target is active at any time and must be found in
+ *   order.</li>
+ *   <li>The targets are ordered from lowest to highest firstly by their x
+ *   coordinate, then their y coordinate and finally their z coordinate.</li>
+ *   <li>The current target to be sought is always surrounded by a blue
+ *   halo.</li>
+ *   <li>Testing anywhere within this blue halo is enough to trigger the
+ *   target and find it.</li>
+ *   <li>Testing a point in the domain takes approximately one second.</li>
+ * </ul>
+ * @author Robert Haines
+ * @see org.realitygrid.examples.paramsearch.crawlers
  */
 public class Domain {
 	private final static int SLEEP_TIME = 1000;
@@ -134,7 +134,7 @@ public class Domain {
 	public int getSize() {
 		return size;
 	}
-	
+
 	/**
 	 * Reset the "found" status of each of the targets in the domain. This is
 	 * generally only used by something that is benchmarking a domain.
@@ -144,7 +144,7 @@ public class Domain {
 		for(Target t : targets)
 			t.reset();
 	}
-		
+
 	/**
 	 * Get the vector from the test point to the target.
 	 * This will be the zero vector if the test point is the same as the
@@ -154,23 +154,23 @@ public class Domain {
 	 * @see Point3D
 	 * @see Vector3D
 	 */
-	public Vector3D search(Point3D location) {		
+	public Vector3D search(Point3D location) {
 		if(location == null)
 			return null;
-		
+
 		for(Target t : targets) {
 			if(t.isFound())
 				continue;
-			
+
 			if(t.isFound(location))
 				return Vector3D.ZERO;
-			
+
 			return location.getVectorTo(t.getLocation());
 		}
-		
+
 		return Vector3D.ZERO;
 	}
-	
+
 	/**
 	 * Test a point to see if it is within a certain distance of a target.
 	 * @param location
@@ -187,14 +187,14 @@ public class Domain {
 
 		if(location == null)
 			return null;
-		
+
 		for(Target t : targets) {
 			if(t.isFound())
 				continue;
-			
+
 			return t.search(location);
 		}
-		
+
 		return null;
 	}
 
@@ -206,13 +206,13 @@ public class Domain {
 		for(Target t : targets) {
 			if(t.isFound())
 				continue;
-			
+
 			return t.getLocation().moveBy(new Vector3D(-ERROR, -ERROR, -ERROR));
 		}
-		
+
 		return null;
 	}
-	
+
 	private void generateTargets(byte[] hash) {
 		int h = 0;
 		int multiplier = size / 256;
@@ -232,7 +232,7 @@ public class Domain {
 	public String toString() {
 		int found = 0;
 		String result = "Domain created for " + name + ", size = " + size
-				+ ".\nTargets found: ";
+		+ ".\nTargets found: ";
 		for (Target t : targets)
 			if (t.isFound()) {
 				result += t + "\n               ";
@@ -269,10 +269,10 @@ public class Domain {
 				found = true;
 				return location;
 			}
-			
+
 			return null;
 		}
-		
+
 		Point3D getLocation() {
 			return location;
 		}
