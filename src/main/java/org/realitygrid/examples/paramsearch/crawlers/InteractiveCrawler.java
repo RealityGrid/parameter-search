@@ -47,6 +47,8 @@ package org.realitygrid.examples.paramsearch.crawlers;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javax.swing.JPanel;
+
 import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
@@ -55,11 +57,13 @@ import org.realitygrid.examples.paramsearch.Vector3D;
  * The InteractiveCrawler is the base class of any crawler that is to be
  * controlled by the user rather than automatic. A queue is made available for
  * external code to pass points in to be tested however they have been
- * selected.
+ * selected.<p/>Subclasses are required to provide a panel that acquires user
+ * input and adds to the queue for the purposes of testing points in the
+ * domain.
  * @author RobertHaines
  * @see Domain
  */
-public class InteractiveCrawler extends AbstractCrawler {
+public abstract class InteractiveCrawler extends AbstractCrawler {
 
 	private static final int SLEEP_TIME = 1000;
 
@@ -86,7 +90,7 @@ public class InteractiveCrawler extends AbstractCrawler {
 	}
 	
 	@Override
-	public Point3D search() {
+	public final Point3D search() {
 		Point3D p;
 		
 		do {
@@ -110,4 +114,10 @@ public class InteractiveCrawler extends AbstractCrawler {
 		}
 		while(true);
 	}
+
+	/**
+	 * Get the user interface panel that controls this interactive crawler.
+	 * @return the panel.
+	 */
+	public abstract JPanel getPanel();
 }

@@ -45,7 +45,23 @@
 
 package org.realitygrid.examples.paramsearch.crawlers;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EtchedBorder;
+
 import org.realitygrid.examples.paramsearch.Domain;
+import org.realitygrid.examples.paramsearch.Point3D;
 
 /**
  * @author Robert Haines
@@ -54,11 +70,77 @@ import org.realitygrid.examples.paramsearch.Domain;
  */
 public final class SteeredCrawler extends InteractiveCrawler {
 
+	private static final int PAD = 5;
+
+	// panel components
+	private JPanel panel;
+	private JSpinner xInput;
+	private JSpinner yInput;
+	private JSpinner zInput;
+	private JButton testButton;
+
 	/**
 	 * Create a SteeredCrawler with the specified domain.
 	 * @param d the domain to be searched.
 	 */
 	public SteeredCrawler(Domain d) {
 		super("Steered Crawler", d);
+		panel = null;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if(panel != null)
+			return panel;
+
+		int dSize = getDomainSize();
+		int modelStart = dSize / 2;
+		int modelEnd = dSize - 1;
+		int modelStep = 10;
+
+		JPanel point = new JPanel();
+		point.setLayout(new BoxLayout(point, BoxLayout.LINE_AXIS));
+		point.add(Box.createRigidArea(new Dimension(PAD, 0)));
+
+		point.add(new JLabel("("));
+		xInput = (JSpinner) point.add(
+				new JSpinner(new SpinnerNumberModel(modelStart, 0, modelEnd, modelStep)));
+		point.add(new JLabel(","));
+		yInput = (JSpinner) point.add(
+				new JSpinner(new SpinnerNumberModel(modelStart, 0, modelEnd, modelStep)));
+		point.add(new JLabel(","));
+		zInput = (JSpinner) point.add(
+				new JSpinner(new SpinnerNumberModel(modelStart, 0, modelEnd, modelStep)));
+		point.add(new JLabel(")"));
+
+		point.add(Box.createRigidArea(new Dimension(PAD, 0)));
+
+		JPanel test = new JPanel();
+		test.setLayout(new BoxLayout(test, BoxLayout.PAGE_AXIS));
+		test.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Choose point"));
+		test.add(point);
+		test.add(Box.createRigidArea(new Dimension(0, PAD)));
+		testButton = (JButton) test.add(new JButton(" Test! "));
+		testButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		testButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int x = (Integer) xInput.getValue();
+				int y = (Integer) yInput.getValue();
+				int z = (Integer) zInput.getValue();
+
+				queue(new Point3D(x, y, z));
+			}
+		});
+
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(0, PAD)));
+		panel.add(test);
+		panel.add(Box.createRigidArea(new Dimension(0, PAD)));
+
+		return panel;
 	}
 }

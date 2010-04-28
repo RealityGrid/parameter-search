@@ -125,7 +125,7 @@ public class MainWindow extends JFrame {
 		this.topView = new ViewPanel(ViewPanel.Projection.XZ, PANEL_SIZE, domainSize);
 		this.sideView = new ViewPanel(ViewPanel.Projection.ZY, PANEL_SIZE, domainSize);
 		this.frontView = new ViewPanel(ViewPanel.Projection.XY, PANEL_SIZE, domainSize);
-		this.infoPanel = new ControlPanel(this, domain, PANEL_SIZE);
+		this.infoPanel = new ControlPanel(this, PANEL_SIZE);
 
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
