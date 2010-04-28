@@ -87,23 +87,27 @@ public class InteractiveCrawler extends AbstractCrawler {
 	
 	@Override
 	public Point3D search() {
-		Point3D p = pointQueue.poll();
+		Point3D p;
 		
-		if(p == null) {
-			try {
-				Thread.sleep(SLEEP_TIME);
-			} catch (InterruptedException e) {
-				// don't care!
-			}
-			
-			return null;
-		}
-		
-		System.out.print("Testing " + p + "...");
-		Vector3D next = testPoint(p);
-		boolean result = next.equals(Vector3D.ZERO);
-		System.out.println(result ? "  Yes!" : "  Try again.");
+		do {
+			p = pointQueue.poll();
 
-		return result ? p : null;
+			if(p == null) {
+				try {
+					Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					// don't care!
+				}
+			}
+			else {
+				System.out.print("Testing " + p + "...");
+				Vector3D next = testPoint(p);
+				boolean result = next.equals(Vector3D.ZERO);
+				System.out.println(result ? "  Yes!" : "  Try again.");
+				if(result)
+					return p;
+			}
+		}
+		while(true);
 	}
 }
