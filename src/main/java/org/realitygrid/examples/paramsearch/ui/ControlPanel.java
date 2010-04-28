@@ -69,12 +69,15 @@ import org.realitygrid.examples.paramsearch.crawlers.InteractiveCrawler;
  * This class is a user interface element that displays information about the
  * search being performed on a domain.<p/>If the search is autonomous then
  * progress is reported but if it is an interactive search then a mechanism for
- * the user to choose test points is provided.
+ * the user to choose test points is provided.<p/>When this class is
+ * instantiated it redirects {@code System.out} to its status window so any
+ * output from the search process is displayed in the GUI.
  * @author Robert Haines
  * @see MainWindow
  * @see Domain
  * @see AbstractCrawler
  * @see InteractiveCrawler
+ * @see System#setOut(java.io.PrintStream)
  */
 public final class ControlPanel extends JPanel {
 
@@ -124,7 +127,9 @@ public final class ControlPanel extends JPanel {
 	}
 	
 	private JPanel createPanel() {
+		// create status panel and redirect System.out to it
 		status = new StatusPanel();
+		System.setOut(status.getPrintStream());
 		
 		control = new JPanel();
 		control.setLayout(new BoxLayout(control, BoxLayout.PAGE_AXIS));
