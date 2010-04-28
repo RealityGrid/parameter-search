@@ -153,7 +153,7 @@ public abstract class AbstractCrawler {
 		}
 		else {
 			updateView(p, false);
-			return domain.search(p);
+			return domain.search(p).unitComponents();
 		}
 	}
 

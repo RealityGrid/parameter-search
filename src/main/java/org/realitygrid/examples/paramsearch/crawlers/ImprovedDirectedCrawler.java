@@ -77,7 +77,7 @@ public final class ImprovedDirectedCrawler extends DirectedCrawler {
 				return start;
 			}
 
-			start = start.moveBy(squash(next));
+			start = start.moveBy(next);
 		}
 		while(true);
 	}

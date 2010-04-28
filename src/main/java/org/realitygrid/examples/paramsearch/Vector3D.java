@@ -119,4 +119,17 @@ public final class Vector3D extends Tuple3<Double> {
 	public Vector3D normalize() {
 		return new Vector3D(getX() / magnitude, getY() / magnitude, getZ() / magnitude);
 	}
+
+	/**
+	 * "Squash" this vector so that it just has unit components. So squashing
+	 * the vector {@code (3.2, 0.0, -0.2)} would give {@code (1.0, 0.0, -1.0)}.
+	 * @return the squashed vector.
+	 */
+	public Vector3D unitComponents() {
+		double x = (getX() == 0.0) ? 0.0 : (getX() < 0.0) ? -1.0 : 1.0;
+		double y = (getY() == 0.0) ? 0.0 : (getY() < 0.0) ? -1.0 : 1.0;
+		double z = (getZ() == 0.0) ? 0.0 : (getZ() < 0.0) ? -1.0 : 1.0;
+
+		return new Vector3D(x, y, z);
+	}
 }
