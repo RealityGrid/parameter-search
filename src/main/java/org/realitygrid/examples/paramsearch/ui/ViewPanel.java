@@ -78,7 +78,7 @@ public final class ViewPanel extends JPanel {
 
 	private int panelSize;
 	private int domainSize;
-	private Projection projection;
+	private Projection2D projection;
 
 	// components
 	private JLabel titleLabel;
@@ -91,7 +91,7 @@ public final class ViewPanel extends JPanel {
 	 * @param ps the panel size required.
 	 * @param ds the domain size being shown.
 	 */
-	public ViewPanel(Projection p, int ps, int ds) {
+	public ViewPanel(Projection2D p, int ps, int ds) {
 		super(true);
 
 		panelSize = ps;
@@ -126,40 +126,6 @@ public final class ViewPanel extends JPanel {
 	 */
 	public void showHint(Point3D p, Dimension d) {
 		this.view.setHint(projection.projectPoint(p), d);
-	}
-
-	enum Projection {
-		XY("Front", "X", "Y"),
-		XZ("Top", "X", "Z"),
-		ZY("Side", "Z", "Y");
-
-		private final String title;
-		private final String x;
-		private final String y;
-
-		Projection(String t, String x, String y) {
-			this.title = t;
-			this.x = x;
-			this.y = y;
-		}
-
-		String getTitle() {
-			return title;
-		}
-
-		String getX() {
-			return x;
-		}
-
-		String getY() {
-			return y;
-		}
-
-		Point projectPoint(Point3D p) {
-			int x = (this.x.equals("X")) ? p.getX() : p.getZ();
-			int y = (this.y.equals("Y")) ? p.getY() : p.getZ();
-			return new Point(x, y);
-		}
 	}
 
 	final class View extends JPanel {
