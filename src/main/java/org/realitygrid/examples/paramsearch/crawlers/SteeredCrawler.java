@@ -52,7 +52,7 @@ import org.realitygrid.examples.paramsearch.Domain;
  * @see InteractiveCrawler
  * @see Domain
  */
-public class SteeredCrawler extends InteractiveCrawler {
+public final class SteeredCrawler extends InteractiveCrawler {
 
 	/**
 	 * Create a SteeredCrawler with the specified domain.

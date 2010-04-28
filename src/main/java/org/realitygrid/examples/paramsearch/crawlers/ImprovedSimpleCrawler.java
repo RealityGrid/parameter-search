@@ -58,7 +58,7 @@ import org.realitygrid.examples.paramsearch.Vector3D;
  * @see SimpleCrawler
  * @see Domain
  */
-public class ImprovedSimpleCrawler extends SimpleCrawler {
+public final class ImprovedSimpleCrawler extends SimpleCrawler {
 
 	private int xLocation;
 	private int yLocation;

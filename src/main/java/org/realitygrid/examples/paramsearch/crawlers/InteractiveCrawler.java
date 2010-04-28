@@ -70,7 +70,7 @@ public class InteractiveCrawler extends AbstractCrawler {
 	 * @param s the name (type) of the crawler.
 	 * @param d the domain to be searched.
 	 */
-	public InteractiveCrawler(String s, Domain d) {
+	protected InteractiveCrawler(String s, Domain d) {
 		super(s, d, true);
 		
 		pointQueue = new ConcurrentLinkedQueue<Point3D>();

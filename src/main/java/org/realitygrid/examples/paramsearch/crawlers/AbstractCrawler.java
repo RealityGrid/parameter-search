@@ -71,7 +71,7 @@ public abstract class AbstractCrawler {
 	 * @param d the domain to search.
 	 * @param b whether the crawler is to be interactive.
 	 */
-	public AbstractCrawler(String s, Domain d, boolean b) {
+	protected AbstractCrawler(String s, Domain d, boolean b) {
 		view = null;
 		name = s;
 		domain = d;
@@ -83,7 +83,7 @@ public abstract class AbstractCrawler {
 	 * @param s the name (type) of this crawler.
 	 * @param d the domain to search.
 	 */
-	public AbstractCrawler(String s, Domain d) {
+	protected AbstractCrawler(String s, Domain d) {
 		this(s, d, false);
 	}
 	
@@ -91,7 +91,7 @@ public abstract class AbstractCrawler {
 	 * Get the name of the domain.
 	 * @return the name of the domain.
 	 */
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
@@ -99,7 +99,7 @@ public abstract class AbstractCrawler {
 	 * Get the size (side length) of the domain.
 	 * @return the size of the domain.
 	 */
-	public int getDomainSize() {
+	public final int getDomainSize() {
 		return domain.getSize();
 	}
 	
@@ -108,7 +108,7 @@ public abstract class AbstractCrawler {
 	 * it can be observed searching for the targets.
 	 * @param view the viewing GUI to attach to this crawler.
 	 */
-	public void setView(MainWindow view) {
+	public final void setView(MainWindow view) {
 		this.view = view;
 	}
 
@@ -116,7 +116,7 @@ public abstract class AbstractCrawler {
 	 * Get the interactive status of this crawler.
 	 * @return whether this crawler is interactive or not.
 	 */
-	public boolean isInteractive() {
+	public final boolean isInteractive() {
 		return interactive;
 	}
 
@@ -126,7 +126,7 @@ public abstract class AbstractCrawler {
 	 * are found.
 	 * @see #search()
 	 */
-	public void run() {
+	public final void run() {
 		int found = 0;
 		
 		do {
@@ -145,7 +145,7 @@ public abstract class AbstractCrawler {
 	 * @return the zero vector if the point is found or a hint towards
 	 * finding it if not.
 	 */
-	protected Vector3D testPoint(Point3D p) {
+	protected final Vector3D testPoint(Point3D p) {
 		Point3D test = domain.isWithinError(p);
 		if(test != null) {
 			updateView(test, true);
@@ -157,7 +157,7 @@ public abstract class AbstractCrawler {
 		}
 	}
 	
-	private void updateView(Point3D p, boolean found) {
+	private final void updateView(Point3D p, boolean found) {
 		if(this.view != null) {
 			view.showPoint(p, found);
 		}

@@ -57,7 +57,7 @@ import org.realitygrid.examples.paramsearch.Vector3D;
  * @author Robert Haines
  * @see Domain
  */
-public class RandomCrawler extends AbstractCrawler {
+public final class RandomCrawler extends AbstractCrawler {
 
 	private Random random;
 	private final int size;

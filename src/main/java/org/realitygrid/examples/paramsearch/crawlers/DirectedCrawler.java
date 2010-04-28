@@ -72,7 +72,7 @@ public class DirectedCrawler extends AbstractCrawler {
 	 * @param s the name (type) of the crawler.
 	 * @param d the domain to be searched.
 	 */
-	public DirectedCrawler(String s, Domain d) {
+	protected DirectedCrawler(String s, Domain d) {
 		super(s, d);
 		start = new Point3D(0);	
 	}

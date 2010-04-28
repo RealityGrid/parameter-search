@@ -63,7 +63,7 @@ public class SimpleCrawler extends AbstractCrawler {
 	 * @param s the name (type) of the crawler.
 	 * @param d the domain to be searched.
 	 */
-	public SimpleCrawler(String s, Domain d) {
+	protected SimpleCrawler(String s, Domain d) {
 		super(s, d);
 	}
 
