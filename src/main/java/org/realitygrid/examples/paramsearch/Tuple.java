@@ -60,7 +60,7 @@ public class Tuple<T extends Number> {
 	/**
 	 * The list of components that make up this tuple.
 	 */
-	ArrayList<T> components;
+	protected ArrayList<T> components;
 
 	/**
 	 * Create a tuple using the supplied ArrayList as its component list.
@@ -122,7 +122,7 @@ public class Tuple<T extends Number> {
 	}
 
 	/**
-	 * Get the length of this tuple.
+	 * Get the length (number of components) of this tuple.
 	 * @return the length of this tuple.
 	 */
 	public int getLength() {
