@@ -63,7 +63,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-
+/**
+ * The ViewPanel class is a user interface component that displays a view of
+ * the domain being searched. Each instance is passed a Projection that
+ * determines whether it is a XZ (top), XY (front) or ZY (side) view. 
+ * @author Robert Haines
+ */
 final class ViewPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -77,6 +82,13 @@ final class ViewPanel extends JPanel {
 	private JLabel titleLabel;
 	private View view;
 	
+	/**
+	 * Create a ViewPanel with the specified projection, panel size and domain
+	 * size.
+	 * @param p the projection that this panel will be showing.
+	 * @param ps the panel size required.
+	 * @param ds the domain size being shown.
+	 */
 	public ViewPanel(Projection p, int ps, int ds) {
 		super(true);
 		
@@ -96,10 +108,22 @@ final class ViewPanel extends JPanel {
 		this.add(titleLabel);
 	}
 	
+	/**
+	 * Show a point in this panel.
+	 * @param p the point to show.
+	 * @param found whether or not this point has been found.
+	 */
 	public void showPoint(Point p, boolean found) {
 		this.view.addPoint(p, found);
 	}
 	
+	/**
+	 * Show a target hint in this panel.
+	 * @param x the X coordinate of the hint.
+	 * @param y the Y coordinate of the hint.
+	 * @param w the width of the hint.
+	 * @param h the height of the hint.
+	 */
 	public void showHint(int x, int y, int w, int h) {
 		this.view.setHint(x, y, w, h);
 	}
@@ -112,6 +136,7 @@ final class ViewPanel extends JPanel {
 		private final String title;
 		private final String x;
 		private final String y;
+		
 		Projection(String t, String x, String y) {
 			this.title = t;
 			this.x = x;

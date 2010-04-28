@@ -49,12 +49,28 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The SimpleCrawler search strategy is to start at the origin and work its way
+ * along each axis in turn to find the targets. Once it has found a target it
+ * resets to the origin and searches for the next one.
+ * @author Robert Haines
+ * @see Domain
+ */
 public class SimpleCrawler extends AbstractCrawler {
 
+	/**
+	 * Create a SimpleCrawler with the specified name and domain.
+	 * @param s the name (type) of the crawler.
+	 * @param d the domain to be searched.
+	 */
 	public SimpleCrawler(String s, Domain d) {
 		super(s, d);
 	}
 
+	/**
+	 * Create a SimpleCrawler with the specified domain.
+	 * @param d the domain to be searched.
+	 */
 	public SimpleCrawler(Domain d) {
 		this("Simple Crawler", d);
 	}

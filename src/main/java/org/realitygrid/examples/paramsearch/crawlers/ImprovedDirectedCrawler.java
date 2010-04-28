@@ -49,8 +49,20 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The ImproveDirectedCrawler works like the DirectedCrawler, but it can
+ * move along all three axes at once in single unit steps. It also restarts
+ * from the last found target when searching for the next one.
+ * @author Robert Haines
+ * @see DirectedCrawler
+ * @see Domain
+ */
 public final class ImprovedDirectedCrawler extends DirectedCrawler {
 	
+	/**
+	 * Create a ImprovedDirectCrawler with the specified domain.
+	 * @param d the domain to be searched.
+	 */
 	public ImprovedDirectedCrawler(Domain d) {
 		super("Improved Directed Crawler", d);
 	}

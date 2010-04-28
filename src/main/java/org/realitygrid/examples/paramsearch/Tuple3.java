@@ -45,32 +45,69 @@
 
 package org.realitygrid.examples.paramsearch;
 
+/**
+ * This class specialises {@link Tuple} to have three components. It is a
+ * convenient intermediate class between {@link Tuple} and {@link Point3D}
+ * and {@link Vector3D}.
+ * @author Robert Haines
+ */
 public class Tuple3<T extends Number> extends Tuple<T> {
 
+	/**
+	 * Create a Tuple3 from another.
+	 * @param t the tuple to copy.
+	 */
 	public Tuple3(Tuple3<T> t) {
 		super(t.components);
 	}
 
+	/**
+	 * Create a Tuple3 with the specified components.
+	 * @param x the first component.
+	 * @param y the second component.
+	 * @param z the third component.
+	 */
 	public Tuple3(T x, T y, T z) {
 		super(x, y, z);
 	}
 
+	/**
+	 * Create a Tuple3 with all components equal.
+	 * @param c the single value to use for all three components.
+	 */
 	public Tuple3(T c) {
 		super(c, c, c);
 	}
 
+	/**
+	 * Get the first component.
+	 * @return the first component.
+	 */
 	public T getX() {
 		return this.components.get(0);
 	}
 
+	/**
+	 * Get the second component.
+	 * @return the second component.
+	 */
 	public T getY() {
 		return this.components.get(1);
 	}
 
+	/**
+	 * Get the third component.
+	 * @return the third component.
+	 */
 	public T getZ() {
 		return this.components.get(2);
 	}
 
+	/**
+	 * Get the distance between this tuple and another.
+	 * @param t the other tuple.
+	 * @return the distance between the two tuples.
+	 */
 	public <U extends Number> double distance(Tuple3<U> t) {
 		return super.distance(t);
 	}

@@ -54,6 +54,12 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.crawlers.AbstractCrawler;
 import org.realitygrid.examples.paramsearch.ui.MainWindow;
 
+/**
+ * This class is used to run a search strategy (Crawler) over a target domain.
+ * @author Robert Haines
+ * @see org.realitygrid.examples.paramsearch.Domain
+ * @see org.realitygrid.examples.paramsearch.crawlers
+ */
 public final class Runner {
 
 	private static final int DOMAIN_SIZE = 300;
@@ -65,7 +71,14 @@ public final class Runner {
 	private String crawlerName;
 	
 	/**
-	 * @param args
+	 * This is the standard entry point for this example. It creates a Runner
+	 * which in turn instantiates a crawler and runs it. Its usage is described
+	 * as follows:
+	 * <p/>{@code Usage: java Runner [OPTIONS] <Crawler>}
+	 * <p/>{@code Where OPTIONS can be one of:}<br/>
+	 * {@code   -b		benchmark the crawler with a standard target set.}<br/>
+     * {@code   -c		console only, no user interface (implies -b).}
+	 * @param args The command line arguments with which to configure the run.
 	 */
 	public static void main(String[] args) {
 		Runner runner;
@@ -130,6 +143,14 @@ public final class Runner {
 		}
 	}
 
+	/**
+	 * Creates a runner.
+	 * 
+	 * @param classname The name of the crawler to be used with this runner. In
+	 * practice this can be anything.
+	 * @param benchmark Whether this runner is to be used to benchmark the
+	 * specified crawler.
+	 */
 	public Runner(String classname, boolean benchmark) {
 		crawlerName = classname;
 		
@@ -141,14 +162,31 @@ public final class Runner {
 		}
 	}
 	
+	/**
+	 * Creates a non-benchmarking runner.
+	 * 
+	 * @param classname The name of the crawler to be used with this runner. In
+	 * practice this can be anything.
+	 */
 	public Runner(String classname) {
 		this(classname, false);
 	}
 	
+	/**
+	 * Get the name of the crawler being used by this runner.
+	 * 
+	 * @return The name of the crawler being used.
+	 */
 	public String getCrawlerName() {
 		return crawlerName;
 	}
 
+	/**
+	 * Runs the crawler. This simply calls the crawler's run method but
+	 * wraps it with timing code.
+	 * 
+	 * @return the time taken, in seconds, by the crawler to complete.
+	 */
 	public double run() {
 		domain.reset();
 		

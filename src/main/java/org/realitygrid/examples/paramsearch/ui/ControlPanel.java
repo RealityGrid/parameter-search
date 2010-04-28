@@ -65,6 +65,17 @@ import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.crawlers.AbstractCrawler;
 import org.realitygrid.examples.paramsearch.crawlers.InteractiveCrawler;
 
+/**
+ * This class is a user interface element that displays information about the
+ * search being performed on a domain.<p/>If the search is autonomous then
+ * progress is reported but if it is an interactive search then a mechanism for
+ * the user to choose test points is provided.
+ * @author Robert Haines
+ * @see MainWindow
+ * @see Domain
+ * @see AbstractCrawler
+ * @see InteractiveCrawler
+ */
 public final class ControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -84,6 +95,12 @@ public final class ControlPanel extends JPanel {
 	private JSpinner zInput;
 	private JButton testButton;
 
+	/**
+	 * Create a control panel.
+	 * @param scw the parent of this panel.
+	 * @param d the domain that is being searched.
+	 * @param ps the panel size required.
+	 */
 	public ControlPanel(MainWindow scw, Domain d, int ps) {
 		super(true);
 		
@@ -178,5 +195,4 @@ public final class ControlPanel extends JPanel {
 		
 		return container;
 	}
-	
 }

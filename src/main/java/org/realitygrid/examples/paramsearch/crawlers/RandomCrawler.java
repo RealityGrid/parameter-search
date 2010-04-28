@@ -51,11 +51,21 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The RandomCrawler simply chooses random points in 3D space and tests them
+ * against the current target. It is a truly abysmal search strategy.
+ * @author Robert Haines
+ * @see Domain
+ */
 public class RandomCrawler extends AbstractCrawler {
 
 	private Random random;
 	private final int size;
 	
+	/**
+	 * Create an RandomCrawler to search the provided domain.
+	 * @param d the domain to search.
+	 */
 	public RandomCrawler(Domain d) {
 		super("Random Crawler", d);
 		random = new Random();

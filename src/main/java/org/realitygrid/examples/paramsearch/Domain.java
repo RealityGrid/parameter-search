@@ -50,6 +50,28 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+  * The Domain class represents a volume of 3D space that has a number of
+  * targets hidden in it. These targets must be found. The only way of
+  * finding a target is to ask the domain whether a point in space is within
+  * a certain distance of it or not. If so the target is marked as found and
+  * the next target, if there is one, is activated.
+  * <p/>The following information holds true for any crawler operating on a
+  * domain but certain crawlers know more of it than others:
+  * <ul>
+  *   <li>Only one target is active at any time and must be found in
+  *   order.</li>
+  *   <li>The targets are ordered from lowest to highest firstly by their x
+  *   coordinate, then their y coordinate and finally their z coordinate.</li>
+  *   <li>The current target to be sought is always surrounded by a blue
+  *   halo.</li>
+  *   <li>Testing anywhere within this blue halo is enough to trigger the
+  *   target and find it.</li>
+  *   <li>Testing a point in the domain takes approximately one second.</li>
+  * </ul>
+  * @author Robert Haines
+  * @see org.realitygrid.examples.paramsearch.crawlers 
+ */
 public class Domain {
 	private final static int SLEEP_TIME = 1000;
 	private final static int ERROR = 10;
@@ -60,6 +82,13 @@ public class Domain {
 	private int numTargets;
 	private String name;
 
+	/**
+	 * Create a named domain of the specified size and with the required number
+	 * of targets.
+	 * @param name the name of the domain.
+	 * @param size the size (side length) of the domain.
+	 * @param numTargets the number of targets to embed in the domain.
+	 */
 	public Domain(String name, int size, int numTargets) {
 		this.size = size;
 		this.name = name;
@@ -81,23 +110,50 @@ public class Domain {
 		}
 	}
 
+	/**
+	 * Get the name of the domain.
+	 * @return the name of the domain.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Get the number of targets in this domain.
+	 * @return the number of targets.
+	 */
 	public int getNumTargets() {
 		return numTargets;
 	}
 
+	/**
+	 * Get the size of the domain. Domains are cubic so a single number is
+	 * used to describe all three side lengths.
+	 * @return the size (side length) of the domain.
+	 */
 	public int getSize() {
 		return size;
 	}
 	
+	/**
+	 * Reset the "found" status of each of the targets in the domain. This is
+	 * generally only used by something that is benchmarking a domain.
+	 * @see org.realitygrid.examples.paramsearch.runner.Runner
+	 */
 	public void reset() {
 		for(Target t : targets)
 			t.reset();
 	}
 		
+	/**
+	 * Get the vector from the test point to the target.
+	 * This will be the zero vector if the test point is the same as the
+	 * target.
+	 * @param location the point to test against the target.
+	 * @return the vector from the test point to the target.
+	 * @see Point3D
+	 * @see Vector3D
+	 */
 	public Vector3D search(Point3D location) {		
 		if(location == null)
 			return null;
@@ -115,6 +171,13 @@ public class Domain {
 		return Vector3D.ZERO;
 	}
 	
+	/**
+	 * Test a point to see if it is within a certain distance of a target.
+	 * @param location
+	 * @return the actual target point if test point is within the error
+	 * bounds, null otherwise.
+	 * @see Point3D
+	 */
 	public Point3D isWithinError(Point3D location) {
 		// sleep to emulate work
 		try {
@@ -135,6 +198,10 @@ public class Domain {
 		return null;
 	}
 
+	/**
+	 * Get a hint as to where the target might be.
+	 * @return a point offset by an error margin in all three axes.
+	 */
 	public Point3D getHint() {
 		for(Target t : targets) {
 			if(t.isFound())

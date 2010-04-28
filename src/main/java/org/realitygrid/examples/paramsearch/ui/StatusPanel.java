@@ -54,6 +54,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
 
+/**
+ * This class provides a status area user interface widget. When created it
+ * redirects System.out to itself so that messages can be output normally
+ * by existing code.
+ * @author Robert Haines
+ * @see PrintStream
+ * @see System#setOut
+ */
 public class StatusPanel extends JScrollPane {
 
 	private static final long serialVersionUID = 1L;
@@ -61,6 +69,9 @@ public class StatusPanel extends JScrollPane {
 	private JTextArea console;
 	private StatusStream stream;
 	
+	/**
+	 * Create a scrollable status panel and redirect System.out to it.
+	 */
 	public StatusPanel() {
 		super(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -74,6 +85,11 @@ public class StatusPanel extends JScrollPane {
 		System.setOut(getPrintStream());
 	}
 
+	/**
+	 * Get a PrintStream that can be used to write to this status panel.
+	 * @return the PrintStream representation of this panel.
+	 * @see PrintStream
+	 */
 	public PrintStream getPrintStream() {
 		return new PrintStream(stream);
 	}

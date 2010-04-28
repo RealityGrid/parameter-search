@@ -45,6 +45,13 @@
 
 package org.realitygrid.examples.paramsearch.runner;
 
+/**
+ * This exception is raised by {@link Runner} when it is asked to load an
+ * incompatible search strategy (Crawler).
+ * @author Robert Haines
+ * @see Runner
+ * @see org.realitygrid.examples.paramsearch.crawlers
+ */
 public class BadCrawlerException extends Exception {
 
 	private static final long serialVersionUID = 1L;

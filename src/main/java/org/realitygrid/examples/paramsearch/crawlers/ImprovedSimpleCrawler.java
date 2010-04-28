@@ -49,12 +49,25 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The ImprovedSimpleCrawler search strategy has slightly more knowledge of the
+ * domain than SimpleCrawler. It still uses the same basic crawl strategy but
+ * knows that the points are ordered in the x axis so will restart from the
+ * point at which it finds the last target.
+ * @author Robert Haines
+ * @see SimpleCrawler
+ * @see Domain
+ */
 public class ImprovedSimpleCrawler extends SimpleCrawler {
 
 	private int xLocation;
 	private int yLocation;
 	private int zLocation;
 	
+	/**
+	 * Create an ImprovedSimpleCrawler to search the provided domain.
+	 * @param d the domain to search.
+	 */
 	public ImprovedSimpleCrawler(Domain d) {
 		super("Improved Simple Crawler", d);
 		
@@ -94,5 +107,4 @@ public class ImprovedSimpleCrawler extends SimpleCrawler {
 		zLocation = 0;
 		return null;
 	}
-
 }

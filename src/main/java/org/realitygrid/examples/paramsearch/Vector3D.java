@@ -45,27 +45,54 @@
 
 package org.realitygrid.examples.paramsearch;
 
+/**
+ * This class represents a vector in 3D space.
+ * @author Robert Haines
+ */
 public final class Vector3D extends Tuple3<Double> {
 	
+	/**
+	 * The zero vector, {@code (0, 0, 0)}.
+	 */
 	public static final Vector3D ZERO = new Vector3D(0.0);
 	
 	private double magnitude;
 
+	/**
+	 * Create a vector with the specified X, Y and Z components.
+	 * @param x the X component.
+	 * @param y the Y component.
+	 * @param z the Z component.
+	 */
 	public Vector3D(Double x, Double y, Double z) {
 		super(x, y, z);
 		calcMagnitude();
 	}
 
+	/**
+	 * Create a vector with its three components specified by the {@link Tuple3}.
+	 * @param t the {@link Tuple3} holding the components to use.
+	 */
 	public Vector3D(Tuple3<Double> t) {
 		super(t);
 		calcMagnitude();
 	}
 	
+	/**
+	 * Create a vector with all components equal.
+	 * @param c the single X, Y and Z component.
+	 */
 	public Vector3D(Double c) {
 		super(c);
 		calcMagnitude();
 	}
 	
+	/**
+	 * Create a vector with {@link Integer} components.
+	 * @param x the X component.
+	 * @param y the Y component.
+	 * @param z the Z component.
+	 */
 	Vector3D(Integer x, Integer y, Integer z) {
 		super(x.doubleValue(), y.doubleValue(), z.doubleValue());
 		calcMagnitude();
@@ -75,10 +102,20 @@ public final class Vector3D extends Tuple3<Double> {
 		magnitude = Math.sqrt((getX() * getX()) + (getY() * getY()) + (getZ() * getZ()));
 	}
 
+	/**
+	 * Get the magnitude of this vector.
+	 * @return the magnitude of this vector.
+	 */
 	public double getMagnitude() {
 		return magnitude;
 	}
 	
+	/**
+	 * Get the normalized form of this vector. A normalized vector is one which
+	 * preserves the direction but has a magnitude of one. It is calculated by
+	 * dividing each component of the original vector by its magnitude.
+	 * @return a new vector which is the normalized form of this one.
+	 */
 	public Vector3D normalize() {
 		return new Vector3D(getX() / magnitude, getY() / magnitude, getZ() / magnitude);
 	}

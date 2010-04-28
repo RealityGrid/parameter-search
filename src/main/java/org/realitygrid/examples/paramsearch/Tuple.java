@@ -47,19 +47,46 @@ package org.realitygrid.examples.paramsearch;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a tuple of arbitrary length. It is the base class of
+ * the component-based classes in this package, {@link Point3D} and
+ * {@link Vector3D}.
+ * <p/>The component list is stored internally as an {@link ArrayList}.
+ * @author Robert Haines
+ *
+ * @param <T> the type (extends {@link Number}) of the elements in this Tuple.
+ */
 public class Tuple<T extends Number> {
+	/**
+	 * The list of components that make up this tuple.
+	 */
 	ArrayList<T> components;
 
+	/**
+	 * Create a tuple using the supplied ArrayList as its component list.
+	 * @param components the ArrayList of components to use.
+	 */
 	public Tuple(ArrayList<T> components) {
 		this.components = components;
 	}
 
+	/**
+	 * Create a tuple of length two with the specified components.
+	 * @param x the first component.
+	 * @param y the second component.
+	 */
 	public Tuple(T x, T y) {
 		this.components = new ArrayList<T>(2);
 		this.components.add(x);
 		this.components.add(y);
 	}
 
+	/**
+	 * Create a tuple of length three with the specified components.
+	 * @param x the first component.
+	 * @param y the second component.
+	 * @param z the third component.
+	 */
 	public Tuple(T x, T y, T z) {
 		this.components = new ArrayList<T>(3);
 		this.components.add(x);
@@ -67,6 +94,13 @@ public class Tuple<T extends Number> {
 		this.components.add(z);
 	}
 
+	/**
+	 * Create a tuple of length four with the specified components.
+	 * @param x the first component.
+	 * @param y the second component.
+	 * @param z the third component.
+	 * @param w the fourth component.
+	 */
 	public Tuple(T x, T y, T z, T w) {
 		this.components = new ArrayList<T>(4);
 		this.components.add(x);
@@ -75,6 +109,11 @@ public class Tuple<T extends Number> {
 		this.components.add(w);
 	}
 
+	/**
+	 * Create a tuple from the supplied array. The items in the array are
+	 * copied, in order, into the internal components ArrayList.
+	 * @param array the array holding the required components.
+	 */
 	public Tuple(T[] array) {
 		this.components = new ArrayList<T>(array.length);
 		for (T a : array) {
@@ -82,10 +121,25 @@ public class Tuple<T extends Number> {
 		}
 	}
 
+	/**
+	 * Get the length of this tuple.
+	 * @return the length of this tuple.
+	 */
 	public int getLength() {
 		return this.components.size();
 	}
 
+	/**
+	 * Get the distance between this tuple and another. The other tuple can be
+	 * of a different type and of a different length. All components are cast
+	 * to doubles internally so that they are compatible for the distance
+	 * calculation. If tuples of different lengths are specified then they are
+	 * mapped into the larger tuple's dimensional space. I.e missing
+	 * components are treated as being zero.
+	 * @param <U> the type of the other tuple.
+	 * @param t the other tuple.
+	 * @return the distance between the two tuples.
+	 */
 	public <U extends Number> double distance(Tuple<U> t) {
 		double a = 0.0;
 		int num = Math.max(this.components.size(), t.getLength());

@@ -47,8 +47,17 @@ package org.realitygrid.examples.paramsearch.crawlers;
 
 import org.realitygrid.examples.paramsearch.Domain;
 
+/**
+ * @author Robert Haines
+ * @see InteractiveCrawler
+ * @see Domain
+ */
 public class SteeredCrawler extends InteractiveCrawler {
 
+	/**
+	 * Create a SteeredCrawler with the specified domain.
+	 * @param d the domain to be searched.
+	 */
 	public SteeredCrawler(Domain d) {
 		super("Steered Crawler", d);
 	}

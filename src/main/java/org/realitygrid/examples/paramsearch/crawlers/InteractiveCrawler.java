@@ -51,18 +51,36 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The InteractiveCrawler is the base class of any crawler that is to be
+ * controlled by the user rather than automatic. A queue is made available for
+ * external code to pass points in to be tested however they have been
+ * selected.
+ * @author RobertHaines
+ * @see Domain
+ */
 public class InteractiveCrawler extends AbstractCrawler {
 
 	private static final int SLEEP_TIME = 1000;
 
 	private ConcurrentLinkedQueue<Point3D> pointQueue;
 
+	/**
+	 * Create an InteractiveCrawler with the specified name and domain.
+	 * @param s the name (type) of the crawler.
+	 * @param d the domain to be searched.
+	 */
 	public InteractiveCrawler(String s, Domain d) {
 		super(s, d, true);
 		
 		pointQueue = new ConcurrentLinkedQueue<Point3D>();
 	}
 
+	/**
+	 * Add a point to be tested to the queue. The queue is polled at intervals
+	 * of one second for new points.
+	 * @param p the point to be added to the queue.
+	 */
 	public void queue(Point3D p) {
 		pointQueue.add(p);
 	}

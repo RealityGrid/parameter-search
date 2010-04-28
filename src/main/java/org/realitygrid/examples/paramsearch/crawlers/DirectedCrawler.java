@@ -49,14 +49,39 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.Vector3D;
 
+/**
+ * The DirectedCrawler starts at the origin but each test directs towards the
+ * target in one unit steps. It travels along the axes one by one (x, then y,
+ * then z) homing in on the target. It restarts from the last target when
+ * finding the next one.
+ * @author Robert Haines
+ * @see Domain
+ */
 public class DirectedCrawler extends AbstractCrawler {
 
+	/**
+	 * The point at which to start searching. This is used to help the crawler
+	 * resume searching at a more sensible place in the domain after it has
+	 * found a target.
+	 */
 	protected Point3D start;
 
+	/**
+	 * Create a DirectCrawler with the specified name and domain and a start
+	 * point at the origin.
+	 * @param s the name (type) of the crawler.
+	 * @param d the domain to be searched.
+	 */
 	public DirectedCrawler(String s, Domain d) {
 		super(s, d);
 		start = new Point3D(0);	
 	}
+	
+	/**
+	 * Create a DirectCrawler with the specified domain and a start point at
+	 * the origin.
+	 * @param d the domain to be searched.
+	 */
 	public DirectedCrawler(Domain d) {
 		this("Directed Crawler", d);
 	}
@@ -83,6 +108,12 @@ public class DirectedCrawler extends AbstractCrawler {
 		while(true);
 	}
 	
+	/**
+	 * "Squash" a vector so that it just has unit components. So squashing the
+	 * vector {@code (3.2, 0.0, -0.2)} would give {@code (1.0, 0.0, -1.0)}. 
+	 * @param v the vector to be squashed.
+	 * @return the squashed vector.
+	 */
 	protected Vector3D squash(Vector3D v) {
 		double x = (v.getX() == 0.0) ? 0.0 : v.getX()/Math.abs(v.getX());
 		double y = (v.getY() == 0.0) ? 0.0 : v.getY()/Math.abs(v.getY());

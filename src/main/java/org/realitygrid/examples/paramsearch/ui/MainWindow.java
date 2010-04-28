@@ -62,6 +62,15 @@ import org.realitygrid.examples.paramsearch.Domain;
 import org.realitygrid.examples.paramsearch.Point3D;
 import org.realitygrid.examples.paramsearch.crawlers.AbstractCrawler;
 
+/**
+ * This class provides the main window for displaying a crawler searching a
+ * domain for targets. As well as organising the various panels that show the
+ * search progress it also marshals communications between the crawler and
+ * domain.
+ * @author Robert Haines
+ * @see Domain
+ * @see org.realitygrid.examples.paramsearch.crawlers
+ */
 public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -78,6 +87,13 @@ public class MainWindow extends JFrame {
 	private ControlPanel infoPanel;
 	private JProgressBar pbar;
 
+	/**
+	 * Create a MainWindow to display the specified crawler searching the
+	 * specified domain.
+	 * @param ac the crawler.
+	 * @param d the domain.
+	 * @throws HeadlessException
+	 */
 	public MainWindow(AbstractCrawler ac, Domain d) throws HeadlessException {
 		super();
 		
@@ -95,6 +111,10 @@ public class MainWindow extends JFrame {
 		showHint();
 	}
 	
+	/**
+	 * Get the crawler that this window is displaying.
+	 * @return the crawler.
+	 */
 	public AbstractCrawler getCrawler() {
 		return parent;
 	}
@@ -157,6 +177,14 @@ public class MainWindow extends JFrame {
 		return p;
 	}
 	
+	/**
+	 * Register a point to be shown in the displays. This method sends the
+	 * point and found status through to the panels that are showing the
+	 * domain. It also updates the progress bar at the bottom of the window if
+	 * required.
+	 * @param p the point to show.
+	 * @param found whether or not this point has been found.
+	 */
 	public void showPoint(Point3D p, boolean found) {
 		if(found) {
 			pbar.setValue(pbar.getValue() + 1);
@@ -168,6 +196,10 @@ public class MainWindow extends JFrame {
 		sideView.showPoint(new Point(p.getZ(), p.getY()), found);
 	}
 
+	/**
+	 * Get a hint for the current target from the domain and pass it on to the
+	 * panels that are showing the domain.
+	 */
 	public void showHint() {
 		Point3D p = domain.getHint();
 		
