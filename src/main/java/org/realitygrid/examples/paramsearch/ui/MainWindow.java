@@ -49,7 +49,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
-import java.awt.Point;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -191,9 +190,9 @@ public class MainWindow extends JFrame {
 			showHint();
 		}
 
-		frontView.showPoint(new Point(p.getX(), p.getY()), found);
-		topView.showPoint(new Point(p.getX(), p.getZ()), found);
-		sideView.showPoint(new Point(p.getZ(), p.getY()), found);
+		frontView.showPoint(p, found);
+		topView.showPoint(p, found);
+		sideView.showPoint(p, found);
 	}
 
 	/**
@@ -204,9 +203,9 @@ public class MainWindow extends JFrame {
 		Point3D p = domain.getHint();
 
 		if(p != null) {
-			frontView.showHint(p.getX(), p.getY(), 20, 20);
-			topView.showHint(p.getX(), p.getZ(), 20, 20);
-			sideView.showHint(p.getZ(), p.getY(), 20, 20);
+			frontView.showHint(p, new Dimension(20, 20));
+			topView.showHint(p, new Dimension(20, 20));
+			sideView.showHint(p, new Dimension(20, 20));
 		}
 	}
 }

@@ -63,13 +63,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import org.realitygrid.examples.paramsearch.Point3D;
+
 /**
  * The ViewPanel class is a user interface component that displays a view of
  * the domain being searched. Each instance is passed a Projection that
  * determines whether it is a XZ (top), XY (front) or ZY (side) view.
  * @author Robert Haines
  */
-final class ViewPanel extends JPanel {
+public final class ViewPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PAD = 5;
@@ -113,19 +115,17 @@ final class ViewPanel extends JPanel {
 	 * @param p the point to show.
 	 * @param found whether or not this point has been found.
 	 */
-	public void showPoint(Point p, boolean found) {
-		this.view.addPoint(p, found);
+	public void showPoint(Point3D p, boolean found) {
+		this.view.addPoint(projection.projectPoint(p), found);
 	}
 
 	/**
 	 * Show a target hint in this panel.
-	 * @param x the X coordinate of the hint.
-	 * @param y the Y coordinate of the hint.
-	 * @param w the width of the hint.
-	 * @param h the height of the hint.
+	 * @param p the point at the bottom left hand corner of the hint.
+	 * @param d the width and height of the hint.
 	 */
-	public void showHint(int x, int y, int w, int h) {
-		this.view.setHint(x, y, w, h);
+	public void showHint(Point3D p, Dimension d) {
+		this.view.setHint(projection.projectPoint(p), d);
 	}
 
 	enum Projection {
@@ -153,6 +153,12 @@ final class ViewPanel extends JPanel {
 
 		String getY() {
 			return y;
+		}
+
+		Point projectPoint(Point3D p) {
+			int x = (this.x.equals("X")) ? p.getX() : p.getZ();
+			int y = (this.y.equals("Y")) ? p.getY() : p.getZ();
+			return new Point(x, y);
 		}
 	}
 
@@ -203,10 +209,11 @@ final class ViewPanel extends JPanel {
 				g2.draw(hint);
 		}
 
-		public void setHint(int x, int y, int w, int h) {
-			x = x + (getSize().width - 1 - size);
-			y = this.size - y - 21;
-			this.hint = new Rectangle2D.Float(x, y, w, h);
+		public void setHint(Point p, Dimension d) {
+			// x and y need to be offset, y needs to flipped
+			int x = p.x + (getSize().width - 1 - size);
+			int y = this.size - p.y - 21;
+			this.hint = new Rectangle2D.Float(x, y, d.width, d.height);
 		}
 
 		public void addPoint(Point p, boolean found) {
