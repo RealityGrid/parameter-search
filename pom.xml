@@ -3,9 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.realitygrid</groupId>
 	<artifactId>parameter-search</artifactId>
-	<version>0.0.1</version>
 	<name>RealityGrid Parameter Search Example</name>
+	<version>1.0.0</version>
+	<description>An example of Computational Steering via the counter example of dumb parameter sweeps.</description>
 	<url>http://code.google.com/p/computational-steering/</url>
+	<organization>
+		<name>The University of Manchester</name>
+		<url>http://www.rcs.manchester.ac.uk/</url>
+	</organization>
 	<build>
 		<plugins>
 			<plugin>

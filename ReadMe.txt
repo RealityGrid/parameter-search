@@ -15,6 +15,10 @@ classes by hand or use Maven:
 
 $ mvn package
 
+If you want to build the Javadoc pages then Maven can do this too:
+
+$ mvn javadoc:javadoc
+
 Maven is likely to be provided by your OS but in case it is not it is
 available here: http://maven.apache.org/
 
