@@ -1,6 +1,16 @@
 Release Notes for the RealityGrid Parameter Search Example
 ----------------------------------------------------------
 
+Version 1.0.1
+-------------
+
+ * Add a menu bar for non-mac platforms.
+ 
+ Internal changes
+ ----------------
+ 
+ * Add maven rules for building release packages.
+
 Version 1.0.0
 -------------
 

@@ -4,7 +4,7 @@
 	<groupId>org.realitygrid</groupId>
 	<artifactId>parameter-search</artifactId>
 	<name>RealityGrid Parameter Search Example</name>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>An example of Computational Steering via the counter example of dumb parameter sweeps.</description>
 	<url>http://code.google.com/p/computational-steering/</url>
 	<organization>
