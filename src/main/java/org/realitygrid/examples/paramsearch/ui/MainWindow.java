@@ -49,11 +49,17 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
@@ -104,6 +110,9 @@ public class MainWindow extends JFrame {
 		contentPane.add(createProgressBar(), BorderLayout.SOUTH);
 
 		this.setTitle("Searching domain with '" + parent.getName() + "'");
+		if(!System.getProperty("os.name").equals("Mac OS X")) {
+			this.setJMenuBar(createMenuBar());
+		}
 		this.pack();
 		this.setResizable(false);
 		parent.setView(this);
@@ -174,6 +183,27 @@ public class MainWindow extends JFrame {
 		p.add(Box.createRigidArea(new Dimension(0, PAD)));
 
 		return p;
+	}
+
+	private JMenuBar createMenuBar() {
+		JMenuBar mbar = new JMenuBar();
+		JMenu menu;
+		JMenuItem item;
+
+		menu = mbar.add(new JMenu("File"));
+		menu.setMnemonic(KeyEvent.VK_F);
+
+		item = menu.add(new JMenuItem("Exit"));
+		item.setMnemonic(KeyEvent.VK_X);
+		item.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		return mbar;
 	}
 
 	/**
